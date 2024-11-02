@@ -1,7 +1,7 @@
 {
     "name": "HRMS",
     "version": "1.0.0",
-    "description": "",
+    "description": "hrms",
     "main": "index.js",
     "scripts": {
       "install-server": "cd backend && npm install",
