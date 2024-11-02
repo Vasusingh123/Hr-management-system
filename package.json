@@ -4,11 +4,11 @@
     "description": "hrms",
     "main": "index.js",
     "scripts": {
-      "install-server": "cd backend && npm install",
-      "start-server": "cd backend && npm start",
-      "install-client": "cd frontend && npm install",
-      "build-client": "cd frontend && npm run build",
-      "start-client": "cd frontend && npm run start"
+      "install-server": "cd BACKEND && npm install",
+      "start-server": "cd BACKEND && npm start",
+      "install-client": "cd FRONTEND && npm install",
+      "build-client": "cd FRONTEND && npm run build",
+      "start-client": "cd FRONTEND && npm run start"
     },
     "repository": {
       "type": "git",
