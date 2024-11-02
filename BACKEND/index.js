@@ -19,7 +19,7 @@ socketInit.init(server);
 // Middleware setup
 app.use(CookieParser("/"));
 app.use(cors({
-    origin: 'http://localhost:3000', // Ensure this matches your frontend's URL
+    origin: process.env.CORS_ORIGIN, // Ensure this matches your frontend's URL
     credentials: true,  // To include credentials like cookies in the requests
 }));
 app.use(express.json());

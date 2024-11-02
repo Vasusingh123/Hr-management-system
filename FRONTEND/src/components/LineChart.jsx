@@ -4,6 +4,7 @@ import { tokens } from "../theme";
 import { mockLineData as data } from "../data/mockData";
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+const API_URL = process.env.REACT_APP_BASE_URL;
 
 const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
   const theme = useTheme();
@@ -13,7 +14,7 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
     // Function to fetch employee count by designation
     const fetchEmployeeDesignationCount = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/employee/designation-count');
+        const response = await axios.get(`${API_URL}/api/employee/designation-count`);
  // Adjust the URL based on your setup
         const fetchedData = response.data;
 

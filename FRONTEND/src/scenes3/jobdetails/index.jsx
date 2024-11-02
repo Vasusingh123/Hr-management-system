@@ -6,7 +6,7 @@ import { Typography, Button } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import ApplyDialog from '../Dialog/ApplyDialog'; // Import the ApplyDialog component
 import axiosInstance from '../../utilis/ApiRequest';
-
+const API_URL= process.env.REACT_APP_BASE_URL;
 const JobDetails = () => {
   const { id } = useParams();
   const [job, setJob] = useState(null);
@@ -17,7 +17,7 @@ const JobDetails = () => {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const response = await axiosInstance.get(`http://localhost:5000/api/get_job/${id}`);
+        const response = await axiosInstance.get(`${API_URL}/api/get_job/${id}`);
         const data = response.data;
         setJob(data);
         setJobTitle(data.jobTitle)

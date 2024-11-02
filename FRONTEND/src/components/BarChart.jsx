@@ -3,6 +3,7 @@ import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios"; // Import axios for HTTP requests
 import { tokens } from "../theme";
+const API_URL = process.env.REACT_APP_BASE_URL;
 
 const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme();
@@ -13,7 +14,7 @@ const BarChart = ({ isDashboard = false }) => {
   useEffect(() => {
     const fetchEmployeeDepartmentCount = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/employee/designation-count');
+        const response = await axios.get(`${API_URL}/api/employee/designation-count`);
         const fetchedData = response.data;
 
         // Transform fetched data to match chart's format

@@ -21,7 +21,7 @@ import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutl
 import IconButton from "@mui/material/IconButton";
 import axios from 'axios';
 import { DataGrid } from "@mui/x-data-grid";
-
+const API_URL = process.env.REACT_APP_BASE_URL;
 const LeaveTypes = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -52,7 +52,7 @@ const LeaveTypes = () => {
   const handleEditLeave = async (id) => {
   try {
     console.log('Leave ID:', id); // Log the leave ID
-    const response = await axiosInstance.get(`http://localhost:5000/api/get_leave/${id}`);
+    const response = await axiosInstance.get(`${API_URL}/api/get_leave/${id}`);
     const existingLeave = response.data;
     console.log("Fetched leave Data:", existingLeave);
 
@@ -88,8 +88,8 @@ const handleDialogSubmit = async () => {
     console.log('Submitting edited leave:', editedLeave);
     try {
         const response = editedLeave._id
-            ? await axiosInstance.put(`http://localhost:5000/api/edit_leave/${editedLeave._id}`, editedLeave)
-            : await axiosInstance.post('http://localhost:5000/api/add_leave', editedLeave);
+            ? await axiosInstance.put(`${API_URL}/api/edit_leave/${editedLeave._id}`, editedLeave)
+            : await axiosInstance.post(`${API_URL}/api/add_leave`, editedLeave);
 
         console.log(response.data); // Log the response data
 
@@ -101,7 +101,7 @@ const handleDialogSubmit = async () => {
     }
 };
 const fetchLeaveData = () => {
-  axiosInstance.get('http://localhost:5000/api/get_leaves')
+  axiosInstance.get(`${API_URL}/api/get_leaves`)
         .then((response) => {
             const modifiedData = response.data.map((row) => ({
                 ...row,
@@ -121,7 +121,7 @@ const fetchLeaveData = () => {
   
       // Send the request to the backend to update the status
       const response = await axiosInstance.put(
-        `http://localhost:5000/api/activate_deactivate_leave/${id}`,
+        `${API_URL}/api/activate_deactivate_leave/${id}`,
         { status: newStatus }
       );
   
@@ -199,7 +199,7 @@ const fetchLeaveData = () => {
     console.log(`Deleting leave with ID: ${id}`);
     
     axiosInstance
-      .delete(`http://localhost:5000/api/delete_leave/${id}`)
+      .delete(`${API_URL}/api/delete_leave/${id}`)
       .then((response) => {
         console.log('Response from backend:', response.data);
         console.log('Leave deleted successfully');

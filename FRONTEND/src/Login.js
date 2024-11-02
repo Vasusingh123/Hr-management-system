@@ -165,6 +165,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from './utilis/AuthContext'; // Import useAuth hook from AuthContext
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_BASE_URL;
+
 const Login = ({ onLoginClick, handleSignUpClick }) => {
   const [loginType, setLoginType] = useState('');
   const [username, setUsername] = useState('');
@@ -218,11 +220,11 @@ const Login = ({ onLoginClick, handleSignUpClick }) => {
   
       try {
         if (loginType === 'admin') {
-          response = await axios.post('http://localhost:5000/api/login_admin', { email: username, password }, { withCredentials: true });
+          response = await axios.post(`${API_URL}/api/login_admin`, { email: username, password }, { withCredentials: true });
         } else if (loginType === 'employee') {
-          response = await axios.post('http://localhost:5000/api/login_employee', { email: username, password }, { withCredentials: true });
+          response = await axios.post(`${API_URL}/api/login_employee`, { email: username, password }, { withCredentials: true });
         } else if (loginType === 'applicant') {
-          response = await axios.post('http://localhost:5000/api/login', { email: username, password }, { withCredentials: true });
+          response = await axios.post(`${API_URL}/api/login`, { email: username, password }, { withCredentials: true });
         }
   
         // Assuming the response contains user data upon successful login

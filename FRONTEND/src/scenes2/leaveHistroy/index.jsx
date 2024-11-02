@@ -6,7 +6,7 @@ import { tokens } from "../../theme";
 import { useTheme } from "@mui/material";
 import axiosInstance from '../../utilis/ApiRequest';
 import { useAuth } from '../../utilis/AuthContext';
-
+const API_URL= process.env.REACT_APP_BASE_URL;
 const LeaveHistory = () => {
   const {currentUser} = useAuth()
     const theme = useTheme();
@@ -18,7 +18,7 @@ const LeaveHistory = () => {
   React.useEffect(() => {
     const fetchLeaveRequests = async () => {
       try {
-        const response = await axiosInstance.get(`http://localhost:5000/api/requestsbyid/${currentUser._id}`);
+        const response = await axiosInstance.get(`${API_URL}/api/requestsbyid/${currentUser._id}`);
         setLeaveRequests(response.data);
       } catch (error) {
         console.error('Error fetching leave requests:', error);
@@ -30,7 +30,7 @@ const LeaveHistory = () => {
 
   const handleCancelRequest = async () => {
     try {
-      const response = await axiosInstance.patch(`http://localhost:5000/api/requests/${selectedRequestId}`, { status: 'cancelled' });
+      const response = await axiosInstance.patch(`${API_URL}/api/requests/${selectedRequestId}`, { status: 'cancelled' });
       if (response.status === 200) {
         setLeaveRequests(leaveRequests.map(request => (request._id === selectedRequestId ? { ...request, status: 'cancelled' } : request)));
         setOpenCancelDialog(false);

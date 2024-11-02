@@ -6,6 +6,7 @@ import { tokens } from "../../theme";
 import { useTheme } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import axiosInstance from '../../utilis/ApiRequest';
+const API_URL = process.env.REACT_APP_BASE_URL;
 
 const LeaveHistoryAdmin = () => {
   const theme = useTheme();
@@ -17,7 +18,7 @@ const LeaveHistoryAdmin = () => {
   React.useEffect(() => {
     const fetchLeaveRequests = async () => {
       try {
-        const response = await axiosInstance.get('http://localhost:5000/api/requests');
+        const response = await axiosInstance.get(`${API_URL}/api/requests`);
         setLeaveRequests(response.data.filter((request) => request.status === 'approved' || request.status === 'rejected'));
       } catch (error) {
         console.error('Error fetching leave requests:', error);

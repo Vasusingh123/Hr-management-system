@@ -3,7 +3,8 @@ import './signUp.css'; // Import SignUp.css for styling
 import SignUpPic from './src assets/pic2.jpg';
 import { Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
- 
+const API_URL = process.env.REACT_APP_BASE_URL;
+
 const SignUp = ({handleAlreadyLogin}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -49,7 +50,7 @@ const SignUp = ({handleAlreadyLogin}) => {
       // For example, you can make an API call to register the user
  
       // Show the popup message
-      const response = await axios.post('http://localhost:5000/api/register', {
+      const response = await axios.post(`${API_URL}/api/register`, {
         name: username,
         email: email,
         password: password

@@ -19,6 +19,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ConfirmationModal from '../../components/ConfirmationModal';
+const API_URL = process.env.REACT_APP_BASE_URL;
 
 const JobsPosted = () => {
   const theme = useTheme();
@@ -104,7 +105,7 @@ const JobsPosted = () => {
     try {
       console.log("Submitting Edited Job:", editedJob); // Add this line
       await axiosInstance.put(`/edit_job/${editedJob._id}`, editedJob);
-      const response = await axiosInstance.get("http://localhost:5000/api/get_jobs");
+      const response = await axiosInstance.get(`${API_URL}/api/get_jobs`);
       setJobs(response.data);
       setEditDialogOpen(false);
       setEditedJob({});
@@ -133,7 +134,7 @@ const JobsPosted = () => {
     console.log(`Deleting job with ID: ${id}`);
     
     axiosInstance
-      .delete(`http://localhost:5000/api/delete_job/${id}`)
+      .delete(`${API_URL}/api/delete_job/${id}`)
       .then((response) => {
         console.log('Response from backend:', response.data);
         console.log('Job deleted successfully');

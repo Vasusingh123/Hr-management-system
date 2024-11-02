@@ -5,7 +5,7 @@ import axios from 'axios'; // Assuming you're using Axios for API calls
 import { tokens } from "../../theme"; // Assuming theme integration
 import { useTheme } from "@mui/material";
 import axiosInstance from '../../utilis/ApiRequest';
-
+const API_URL = process.env.REACT_APP_BASE_URL;
 const PendingLeaves = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -17,7 +17,7 @@ const PendingLeaves = () => {
   React.useEffect(() => {
     const fetchLeaveRequests = async () => {
       try {
-        const response = await axiosInstance.get('http://localhost:5000/api/requests');
+        const response = await axiosInstance.get(`${API_URL}/api/requests`);
         setLeaveRequests(response.data.filter(request => request.status === 'pending')); // Filter pending requests
       } catch (error) {
         console.error('Error fetching leave requests:', error);
@@ -30,7 +30,7 @@ const PendingLeaves = () => {
 
   const handleApproveRequest = async () => {
     try {
-      const response = await axiosInstance.patch(`http://localhost:5000/api/approve_requests/${selectedRequestId}`);
+      const response = await axiosInstance.patch(`${API_URL}/api/approve_requests/${selectedRequestId}`);
       if (response.status === 200) {
         setLeaveRequests(
           leaveRequests.map((request) => (request._id === selectedRequestId ? { ...request, status: 'approved' } : request))
@@ -48,7 +48,7 @@ const PendingLeaves = () => {
 
   const handleRejectRequest = async () => {
     try {
-      const response = await axiosInstance.patch(`http://localhost:5000/api/reject_requests/${selectedRequestId}`);
+      const response = await axiosInstance.patch(`${API_URL}/api/reject_requests/${selectedRequestId}`);
       if (response.status === 200) {
         setLeaveRequests(
           leaveRequests.map((request) => (request._id === selectedRequestId ? { ...request, status: 'rejected' } : request))

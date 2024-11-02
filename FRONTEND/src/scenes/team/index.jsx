@@ -43,7 +43,7 @@ import axios from "axios";
 
 import upload from "../../utilis/upload.js";
 import { useAuth } from "../../utilis/AuthContext.js";
- 
+const API_URL= process.env.REACT_APP_BASE_URL;
 const initialValues = {
   firstName: "",
   lastName: "",
@@ -132,7 +132,7 @@ const Team = () => {
   
     const handleSearch = async () => {
       try {
-        const response = await axiosInstance.get(`http://localhost:5000/api/search_employee/${searchQuery}`);
+        const response = await axiosInstance.get(`${API_URL}/api/search_employee/${searchQuery}`);
         setSearchResults(response.data);
       } catch (error) {
         console.error('Error searching employees:', error);
@@ -153,7 +153,7 @@ const Team = () => {
   
     // Example using axios to send a delete request to the backend
    axiosInstance
-      .delete(`http://localhost:5000/api/delete_employee/${id}`)
+      .delete(`${API_URL}/api/delete_employee/${id}`)
       .then((response) => {
         console.log('Employee deleted successfully');
   
@@ -333,7 +333,7 @@ const handleSubmit = async (e) => {
   console.log(values)
   // console.log(profileCv, profilePic)
   try {
-    await axiosInstance.post("http://localhost:5000/api/add_employee", {
+    await axiosInstance.post(`${API_URL}/api/add_employee`, {
       ...values,
       profilepic: pic,
       profilecv: cv,
@@ -397,7 +397,7 @@ const [leaving, setLeaving] = useState("");
  
   const handleTest = async () => {
     try {
-      await axiosInstance.post('http://localhost:5000/api/add_employee', {
+      await axiosInstance.post(`${API_URL}/api/add_employee`, {
         firstName: fname,
       lastName: lname,
        Email: email,

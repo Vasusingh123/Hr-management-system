@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import { List, ListItem, ListItemText, Badge, IconButton, Popover, Typography } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/NotificationsOutlined';
-
+const API_URL= process.env.REACT_APP_BASE_URL;
 // Ensure this matches your Socket.IO server setup
-const socket = io('http://localhost:5000');
+const socket = io(`${API_URL}`);
 
 const Notifications = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);

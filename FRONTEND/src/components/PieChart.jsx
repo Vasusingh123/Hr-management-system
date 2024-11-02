@@ -4,6 +4,7 @@ import axios from 'axios';
 import { tokens } from "../theme";
 import { useTheme } from "@mui/material";
 // import { mockPieData as data } from "../data/mockData";
+const API_URL = process.env.REACT_APP_BASE_URL;
 
 const PieChart = () => {
   const theme = useTheme();
@@ -12,7 +13,7 @@ const PieChart = () => {
 
   useEffect(() => {
     // Fetch pie chart data from backend
-    axios.get('http://localhost:5000/api/piechartdata')
+    axios.get(`${API_URL}/api/piechartdata`)
       .then(response => {
         setData(response.data);
       })

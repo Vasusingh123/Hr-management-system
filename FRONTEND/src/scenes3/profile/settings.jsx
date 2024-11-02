@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axiosInstance from '../../utilis/ApiRequest.js';
 import { useAuth } from '../../utilis/AuthContext.js';
-
+const API_URL= process.env.REACT_APP_BASE_URL;
 
 const Setting = () => {
     // State variables to store user data
@@ -44,7 +44,7 @@ const Setting = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axiosInstance.get(`http://localhost:5000/api/applicants/${currentUser._id}`);
+                const response = await axiosInstance.get(`${API_URL}/api/applicants/${currentUser._id}`);
                 const userData = response.data.applicant; // Assuming the API returns user data object with a key 'applicant'
                 setUsername(userData.name);
                 setEmail(userData.email);

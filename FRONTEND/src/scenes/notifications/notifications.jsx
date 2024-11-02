@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import { Badge, IconButton, Popover, List, ListItem, ListItemText, Typography } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/NotificationsOutlined';
-
-const socket = io('http://localhost:5000'); // Adjust according to your server setup
+const API_URL = process.env.REACT_APP_BASE_URL;
+const socket = io(`${API_URL}`); // Adjust according to your server setup
 
 const AdminNotifications = () => {
   const [anchorEl, setAnchorEl] = useState(null);

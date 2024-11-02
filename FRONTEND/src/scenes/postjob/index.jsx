@@ -8,7 +8,7 @@ import { Box, useTheme,button } from '@mui/material';
 import { tokens } from "../../theme";
 import { Dialog, DialogActions, DialogContent, DialogContentText, Button } from '@mui/material';
  
- 
+ const API_URL= process.env.REACT_APP_BASE_URL;
 const CreateJob = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -30,7 +30,7 @@ const CreateJob = () => {
         data.skills = selectedOption;
  
         // Make a POST request to your backend API
-        const response = await axiosInstance.post('http://localhost:5000/api/add_job', data);
+        const response = await axiosInstance.post(`${API_URL}/api/add_job`, data);
  
         // Handle the response as needed
         console.log('Job created successfully:', response.data);
@@ -59,7 +59,7 @@ const handleSendEmail = async () => {
         };
  
         // Send the email
-        const sendEmailResponse = await axiosInstance.post('http://localhost:5000/api/send-email', emailData);
+        const sendEmailResponse = await axiosInstance.post(`${API_URL}/api/send-email`, emailData);
         console.log('Email sent successfully:', sendEmailResponse.data);
  
         // Open the dialog with success message

@@ -4,7 +4,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axios from 'axios';
 import upload from "../../utilis/upload.js";
 import axiosInstance from '../../utilis/ApiRequest.js';
-
+const API_URL= process.env.REACT_APP_BASE_URL;
 const ApplyDialog = ({ open, handleClose, jobId, handleApply, jobTitle }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -29,7 +29,7 @@ const handleSubmit = async () => {
     const cvPath = await upload(cv);
   
     try {
-        await axiosInstance.post('http://localhost:5000/api/applied-applicants', {
+        await axiosInstance.post(`${API_URL}/api/applied-applicants`, {
           jobTitle,
           applicants: [
             {

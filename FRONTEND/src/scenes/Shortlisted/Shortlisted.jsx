@@ -7,7 +7,7 @@ import { blue, red ,grey} from '@mui/material/colors';
 import { tokens } from "../../theme";
 import { useTheme } from "@mui/material";
 import axiosInstance from '../../utilis/ApiRequest';
-
+const API_URL= process.env.REACT_APP_BASE_URL;
 const Shortlisted = () => {
   const [selectedJob, setSelectedJob] = useState('');
   const [applicantData, setApplicantData] = useState([]);
@@ -42,7 +42,7 @@ const Shortlisted = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get(`http://localhost:5000/api/applied-applicants/${selectedJob}`);
+        const response = await axiosInstance.get(`${API_URL}/api/applied-applicants/${selectedJob}`);
         const formattedData = response.data.applicants.map((applicant, index) => ({
           ...applicant,
           id: index + 1,
@@ -68,7 +68,7 @@ const Shortlisted = () => {
 
   const fetchJobDetails = async (jobId) => {
     try {
-      const response = await axiosInstance.get(`http://localhost:5000/api/get_job/${jobId}`);
+      const response = await axiosInstance.get(`${API_URL}/api/get_job/${jobId}`);
       setJobDetails(response.data);
     } catch (error) {
       console.error('Error fetching job details:', error);
@@ -106,7 +106,7 @@ const Shortlisted = () => {
       // If confirmed, send the email
       try {
         // Use emailDataForConfirmation instead of emailData
-        const response = await axiosInstance.post('http://localhost:5000/api/send-email', emailDataForConfirmation);
+        const response = await axiosInstance.post(`${API_URL}/api/send-email`, emailDataForConfirmation);
         console.log('Email sent successfully:', response.data);
         setSuccessDialogOpen(true);
         // Add any success message or UI update as needed
@@ -140,8 +140,8 @@ const Shortlisted = () => {
 
     try {
       if (selectedAction === 'select' || selectedAction === 'unselect') {
-        await axiosInstance.post(`http://localhost:5000/api/${selectedAction}/${selectedApplicantId}`, { jobId: selectedJob });
-        const response = await axiosInstance.get(`http://localhost:5000/api/applied-applicants/${selectedJob}`);
+        await axiosInstance.post(`${API_URL}/api/${selectedAction}/${selectedApplicantId}`, { jobId: selectedJob });
+        const response = await axiosInstance.get(`${API_URL}/api/applied-applicants/${selectedJob}`);
         const formattedData = response.data.applicants.map((applicant, index) => ({
           ...applicant,
           id: index + 1,

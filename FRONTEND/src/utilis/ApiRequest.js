@@ -1,16 +1,15 @@
-import axios from 'axios';
-
+import axios from "axios";
+const API_URL = process.env.REACT_APP_BASE_URL;
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000/api', // Adjust the base URL according to your API endpoint
+  baseURL: `${API_URL}/api`, // Adjust the base URL according to your API endpoint
 });
-
 
 // Add interceptor to include access token in the request headers
 axiosInstance.interceptors.request.use(
   (config) => {
     const accessToken = document.cookie.replace(
       /(?:(?:^|.*;\s*)accessToken\s*\=\s*([^;]*).*$)|^.*$/,
-      '$1'
+      "$1"
     );
     // console.log(document.cookie);
     if (accessToken) {
