@@ -39,6 +39,8 @@ const login = async (req,res, next) => {
         res
             .cookie("accessToken", token, {
                 httpOnly: false,
+                sameSite: 'None', // Allows cross-site cookies
+                domain: process.env.CORS_ORIGIN // Adjust according to your frontend's domain
             })
             .status(200)
             .send(info)
