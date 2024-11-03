@@ -136,6 +136,8 @@ const login_admin = async (req,res, next) => {
           .cookie("accessToken", token, {
               httpOnly: false,
               path: '/',
+              sameSite: 'None', // Allows cross-site cookies
+              domain: process.env.CORS_ORIGIN
           })
           .status(200)
           .send(info)
@@ -188,6 +190,8 @@ const login_employee = async (req,res, next) => {
       res
           .cookie("accessToken", token, {
               httpOnly: false,
+              sameSite: 'None', // Allows cross-site cookies
+              domain: process.env.CORS_ORIGIN
           })
           .status(200)
           .send(info)

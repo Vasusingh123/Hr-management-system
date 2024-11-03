@@ -98,7 +98,7 @@ const logout = async (req,res) => {
     res
         .clearCookie("accessToken", {
             sameSite: "none",
-            secure: true
+            domain: process.env.CORS_ORIGIN
         })
         .status(200)
         .send("User has been logged out!")
